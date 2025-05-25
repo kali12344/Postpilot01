@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PostPilot</title>
+  <style>
+    /* Reset and base */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Blurred background image */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('./IMG_5370.PNG') center center / cover no-repeat fixed;
+      filter: blur(8px);
+      z-index: -1;
+    }
+    /* Language switch */
+    .lang-switcher { position: fixed; top: 1rem; right: 1rem; z-index: 200; }
+    /* Navbar */
+    header { background: rgba(0,31,63,0.9); position: fixed; width: 100%; top: 0; z-index: 150; }
+    .navbar { display: flex; max-width: 1200px; margin: 0 auto; padding: 1rem; align-items: center; justify-content: space-between; }
+    .logo img { height: 40px; }
+    .nav-links { list-style: none; display: flex; }
+    .nav-links li { margin-left: 1.5rem; }
+    .nav-links a { color: #fff; text-decoration: none; font-size: 1rem; transition: color 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: #FFD700; }
+    /* Section styling */
+    section { padding: 100px 20px 50px; max-width: 1000px; margin: 0 auto; }
+    .hero { margin-top: 70px; background: rgba(0,31,63,0.7) url('https://via.placeholder.com/1200x400') center/cover no-repeat; height: 400px; display: flex; align-items: center; justify-content: center; }
+    .hero-content { background: rgba(255,255,255,0.85); padding: 2rem; border-radius: 8px; text-align: center; }
+    .hero h1 { color: #001F3F; font-size: 2.5rem; margin-bottom: 1rem; }
+    .hero p { color: #555; font-size: 1.1rem; margin-bottom: 1.5rem; }
+    .btn-primary { background: #001F3F; color: #fff; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 4px; transition: background 0.3s; }
+    .btn-primary:hover { background: #001732; }
+    /* Boxed section content */
+    .section-box {
+      background: rgba(255,255,255,0.85);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    .section-title { color: #001F3F; text-align: center; font-size: 2rem; margin-bottom: 1rem; }
+    .section-content { text-align: center; color: #444; font-size: 1rem; }
+    /* Footer */
+    footer { background: rgba(51,51,51,0.9); color: #fff; text-align: center; padding: 1rem; margin-top: 50px; }
+    .address { font-size: 0.9rem; margin-bottom: 0.5rem; }
+    footer a { color: #FFD700; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <!-- Language Selector -->
+  <div class="lang-switcher">
+    <label for="lang-select">Language:</label>
+    <select id="lang-select">
+      <option value="en">English</option>
+      <option value="sq">Shqip</option>
+    </select>
+  </div>
+
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <a href="#home" class="logo"><img src="./IMG_5370.PNG" alt="PostPilot Logo"></a>
+      <ul class="nav-links">
+        <li><a href="#home" id="nav-home">Home</a></li>
+        <li><a href="#about" id="nav-about">Who We Are</a></li>
+        <li><a href="#features" id="nav-features">Features</a></li>
+        <li><a href="#pricing" id="nav-pricing">Pricing</a></li>
+        <li><a href="#contact" id="nav-contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Home / Hero -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1 id="hero-title"></h1>
+      <p id="hero-text"></p>
+      <a href="#about" class="btn-primary" id="btn-learn"></a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="section-box">
+      <h2 class="section-title" id="about-title"></h2>
+      <p class="section-content" id="about-text"></p>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features">
+    <div class="section-box">
+      <h2 class="section-title" id="features-title"></h2>
+      <p class="section-content" id="features-text"></p>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing">
+    <div class="section-box">
+      <h2 class="section-title" id="pricing-title"></h2>
+      <p class="section-content" id="pricing-text"></p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="section-box">
+      <h2 class="section-title" id="contact-title"></h2>
+      <p class="section-content" id="contact-text"></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p class="address">Muharrem Fejza nr45</p>
+    <p>&copy; 2025 PostPilot. All rights reserved.</p>
+  </footer>
+
+  <!-- Language Script -->
+  <script>
+    const translations = {
+      en: {
+        nav_home: "Home", nav_about: "Who We Are", nav_features: "Features", nav_pricing: "Pricing", nav_contact: "Contact",
+        hero_title: "Welcome to PostPilot", hero_text: "Your partner for building and managing professional websites with ease.", btn_learn: "Learn About Us",
+        about_title: "Who We Are", about_text: "We are a group of high schoolers from Sami Frashri who had an idea about social marketing. We offer different services like managing and creating websites, and advertising them. Thanks.",
+        features_title: "Our Features", features_text: "Drag & drop website builder, analytics dashboard, SEO optimization, responsive templates, and social media integration.",
+        pricing_title: "Pricing Plans", pricing_text: "Choose a plan: Basic (Free), Pro ($15/mo), or Enterprise ($50/mo) with premium support.",
+        contact_title: "Get in Touch", contact_text: "Email us at info@postpilot.com or visit us at Muharrem Fejza nr45."
+      },
+      sq: {
+        nav_home: "Kreu", nav_about: "Kush Jemi Ne", nav_features: "Karakteristikat", nav_pricing: "Çmimet", nav_contact: "Kontakt",
+        hero_title: "Mirësevini në PostPilot", hero_text: "Partneri juaj për krijimin dhe menaxhimin e uebfaqeve profesionale me lehtësi.", btn_learn: "Mësoni Për Ne",
+        about_title: "Kush Jemi Ne", about_text: "Ne jemi një grup nxënësish të shkollës së mesme nga Sami Frashri që patëm një ide për marketingun social. Ne ofrojmë shërbime të ndryshme si menaxhimi dhe krijimi i faqeve të internetit, dhe reklamimin e tyre. Faleminderit.",
+        features_title: "Karakteristikat Tonë", features_text: "Ndërtoni faqet me drag & drop, panel analizash, optimizim SEO, tema të përgjegjshme, dhe integrim me rrjetet sociale.",
+        pricing_title: "Planet e Çmimeve", pricing_text: "Zgjidhni planin: Basic (Falësisht), Pro (15$/muaj), ose Enterprise (50$/muaj) me mbështetje premium.",
+        contact_title: "Na Kontaktoni", contact_text: "Na shkruani në info@postpilot.com ose na vizitoni në Muharrem Fejza nr45."
+      }
+    };
+    function updateLanguage(lang) {
+      document.documentElement.lang = lang;
+      Object.entries(translations[lang]).forEach(([key, val]) => {
+        const el = document.getElementById(key.replace(/_/g, '-'));
+        if(el) el.textContent = val;
+      });
+    }
+    document.getElementById('lang-select').addEventListener('change', e => updateLanguage(e.target.value));
+    window.addEventListener('DOMContentLoaded', () => updateLanguage('en'));
+  </script>
+</body>
